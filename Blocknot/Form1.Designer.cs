@@ -65,6 +65,7 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -289,10 +290,11 @@
             this.toolStripButton2,
             this.toolStripButton3,
             this.toolStripButton5,
-            this.toolStripButton6});
+            this.toolStripButton6,
+            this.toolStripButton4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 31);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(800, 31);
             this.toolStrip1.TabIndex = 12;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -302,7 +304,7 @@
             this.Создать.Image = global::Blocknot.Properties.Resources.create;
             this.Создать.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Создать.Name = "Создать";
-            this.Создать.Size = new System.Drawing.Size(29, 24);
+            this.Создать.Size = new System.Drawing.Size(29, 28);
             this.Создать.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Сохранить
@@ -311,7 +313,7 @@
             this.Сохранить.Image = global::Blocknot.Properties.Resources.сохранить;
             this.Сохранить.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Сохранить.Name = "Сохранить";
-            this.Сохранить.Size = new System.Drawing.Size(29, 24);
+            this.Сохранить.Size = new System.Drawing.Size(29, 28);
             this.Сохранить.Click += new System.EventHandler(this.Сохранить_Click);
             // 
             // Сохранить_как
@@ -320,7 +322,7 @@
             this.Сохранить_как.Image = global::Blocknot.Properties.Resources.save_as;
             this.Сохранить_как.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Сохранить_как.Name = "Сохранить_как";
-            this.Сохранить_как.Size = new System.Drawing.Size(29, 24);
+            this.Сохранить_как.Size = new System.Drawing.Size(29, 28);
             this.Сохранить_как.Click += new System.EventHandler(this.Сохранить_как_Click);
             // 
             // toolStripButton1
@@ -329,7 +331,7 @@
             this.toolStripButton1.Image = global::Blocknot.Properties.Resources.image_2025_02_27_15_13_44;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click_1);
             // 
@@ -339,7 +341,7 @@
             this.Отменить.Image = global::Blocknot.Properties.Resources.назад;
             this.Отменить.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Отменить.Name = "Отменить";
-            this.Отменить.Size = new System.Drawing.Size(29, 24);
+            this.Отменить.Size = new System.Drawing.Size(29, 28);
             this.Отменить.Click += new System.EventHandler(this.Отменить_Click);
             // 
             // Повторить
@@ -348,7 +350,7 @@
             this.Повторить.Image = global::Blocknot.Properties.Resources.вперед;
             this.Повторить.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Повторить.Name = "Повторить";
-            this.Повторить.Size = new System.Drawing.Size(29, 24);
+            this.Повторить.Size = new System.Drawing.Size(29, 28);
             this.Повторить.Click += new System.EventHandler(this.toolStripButton5_Click_1);
             // 
             // Копировать
@@ -357,7 +359,7 @@
             this.Копировать.Image = global::Blocknot.Properties.Resources.копия;
             this.Копировать.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Копировать.Name = "Копировать";
-            this.Копировать.Size = new System.Drawing.Size(29, 24);
+            this.Копировать.Size = new System.Drawing.Size(29, 28);
             this.Копировать.Click += new System.EventHandler(this.Копировать_Click);
             // 
             // Вырезать
@@ -366,7 +368,7 @@
             this.Вырезать.Image = global::Blocknot.Properties.Resources.ножницы;
             this.Вырезать.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Вырезать.Name = "Вырезать";
-            this.Вырезать.Size = new System.Drawing.Size(29, 24);
+            this.Вырезать.Size = new System.Drawing.Size(29, 28);
             this.Вырезать.Click += new System.EventHandler(this.Вырезать_Click);
             // 
             // Вставить
@@ -375,7 +377,7 @@
             this.Вставить.Image = global::Blocknot.Properties.Resources.вставка;
             this.Вставить.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Вставить.Name = "Вставить";
-            this.Вставить.Size = new System.Drawing.Size(29, 24);
+            this.Вставить.Size = new System.Drawing.Size(29, 28);
             this.Вставить.Click += new System.EventHandler(this.Вставить_Click);
             // 
             // toolStripButton2
@@ -384,7 +386,7 @@
             this.toolStripButton2.Image = global::Blocknot.Properties.Resources.image_2025_02_27_15_18_08;
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton2.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStripButton3
@@ -393,7 +395,7 @@
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton3.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton3.Text = "toolStripButton4";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
@@ -403,7 +405,7 @@
             this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton5.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton5.Text = "toolStripButton4";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
@@ -413,9 +415,19 @@
             this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButton6.Size = new System.Drawing.Size(29, 28);
             this.toolStripButton6.Text = "toolStripButton6";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton4.Text = "toolStripButton4";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // Form1
             // 
@@ -480,6 +492,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
     }
 }
 

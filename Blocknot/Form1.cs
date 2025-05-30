@@ -477,43 +477,195 @@ namespace Blocknot
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            string inputText = textBox.Text;
-            // Регулярное выражение для поиска целых чисел (отрицательных и положительных)
-            string pattern = @"(?<!\S)-?\d+(?!\S)";
+            string inputText = textBox.Text.Trim();
+            resultTextBox.Text = "";
 
             try
             {
-                List<RegexSearcher.MatchInfo> matches = RegexSearcher.FindMatches(inputText, pattern);
+                var parser = new RecursiveDescentParser(inputText);
+                parser.ParseE();
 
-                // Фильтрация результатов (убираем числа с плюсом и части дробных чисел)
-                var filteredMatches = matches
-                    .Where(m => !m.Value.StartsWith("+"))
-                    .Where(m => !(m.Position > 0 &&
-                                 inputText[m.Position - 1] == '.' &&
-                                 char.IsDigit(inputText[m.Position - 2])))
-                    .ToList();
-
-                // Формирование вывода
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("Найденные целые числа:");
-
-                foreach (var match in filteredMatches)
+                if (parser.CurrentToken != null)
                 {
-                    // Если нужно считать позиции с 1 вместо 0, добавляем +1
-                    sb.AppendLine($"{match.Value} (позиция: {match.Position + 1})");
+                    throw new Exception($"Ошибка: неожиданный символ '{parser.CurrentToken}' на позиции {parser.GetPosition()}");
                 }
 
-                resultTextBox.Text = sb.ToString();
+                resultTextBox.Text = "Разбор выполнен успешно.\nПоследовательность вызовов:\n" +
+                                    parser.CallSequence;
             }
-            catch (ArgumentException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка в регулярном выражении:\n{ex.Message}",
-                               "Ошибка",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Error);
-                resultTextBox.Text = string.Empty;
+                resultTextBox.Text = $"Ошибка: {ex.Message}";
             }
         }
+
+        class RecursiveDescentParser
+        {
+            private readonly string input;
+            private int position;
+            public string CallSequence { get; private set; } = "";
+
+            public RecursiveDescentParser(string input)
+            {
+                this.input = input;
+                this.position = 0;
+                SkipWhitespace();
+            }
+
+            public char? CurrentToken => position < input.Length ? input[position] : (char?)null;
+            public int GetPosition() => position + 1;
+
+            private void SkipWhitespace()
+            {
+                while (position < input.Length && char.IsWhiteSpace(input[position]))
+                {
+                    position++;
+                }
+            }
+
+            private void AddToSequence(string element)
+            {
+                if (CallSequence.Length > 0)
+                    CallSequence += "-";
+                CallSequence += element;
+            }
+
+            private void Match(char expected)
+            {
+                if (CurrentToken == expected)
+                {
+                    position++;
+                    SkipWhitespace();
+                }
+                else
+                {
+                    throw new Exception($"Ожидался символ '{expected}', но получен '{CurrentToken}'");
+                }
+            }
+
+            private void Match(string expected)
+            {
+                foreach (char c in expected)
+                {
+                    if (CurrentToken != c)
+                    {
+                        throw new Exception($"Ожидалась строка '{expected}', но получен '{CurrentToken}'");
+                    }
+                    position++;
+                }
+                SkipWhitespace();
+            }
+
+            public void ParseE()
+            {
+                AddToSequence("E");
+                ParseE1();
+
+                if (CurrentToken == '=' || CurrentToken == '<' || CurrentToken == '>')
+                {
+                    char op = CurrentToken.Value;
+                    AddToSequence(op.ToString());
+                    Match(op);
+                    ParseE1();
+                }
+            }
+
+            private void ParseE1()
+            {
+                AddToSequence("E1");
+                ParseT();
+
+                while (CurrentToken == '+' || CurrentToken == '-' ||
+                       (CurrentToken == 'o' && LookAhead("or")))
+                {
+                    if (CurrentToken == 'o')
+                    {
+                        AddToSequence("or");
+                        Match("or");
+                    }
+                    else
+                    {
+                        char op = CurrentToken.Value;
+                        AddToSequence(op.ToString());
+                        Match(op);
+                    }
+
+                    ParseT();
+                }
+            }
+
+            private void ParseT()
+            {
+                AddToSequence("T");
+                ParseF();
+
+                while (CurrentToken == '*' || CurrentToken == '/' ||
+                       (CurrentToken == 'a' && LookAhead("and")))
+                {
+                    if (CurrentToken == 'a')
+                    {
+                        AddToSequence("and");
+                        Match("and");
+                    }
+                    else
+                    {
+                        char op = CurrentToken.Value;
+                        AddToSequence(op.ToString());
+                        Match(op);
+                    }
+
+                    ParseF();
+                }
+            }
+
+            private void ParseF()
+            {
+                AddToSequence("F");
+
+                if (CurrentToken == 't' && LookAhead("true"))
+                {
+                    AddToSequence("true");
+                    Match("true");
+                }
+                else if (CurrentToken == 'f' && LookAhead("false"))
+                {
+                    AddToSequence("false");
+                    Match("false");
+                }
+                else if (CurrentToken == 'n' && LookAhead("not"))
+                {
+                    AddToSequence("not");
+                    Match("not");
+                    ParseF();
+                }
+                else if (CurrentToken == '(')
+                {
+                    AddToSequence("(");
+                    Match('(');
+                    ParseE();
+                    AddToSequence(")");
+                    Match(')');
+                }
+                else
+                {
+                    throw new Exception($"Ожидалось 'true', 'false', 'not' или выражение в скобках, но получен '{CurrentToken}'");
+                }
+            }
+
+            private bool LookAhead(string expected)
+            {
+                if (position + expected.Length > input.Length)
+                    return false;
+
+                for (int i = 0; i < expected.Length; i++)
+                {
+                    if (input[position + i] != expected[i])
+                        return false;
+                }
+                return true;
+            }
+        }
+
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
@@ -601,5 +753,26 @@ namespace Blocknot
                 resultTextBox.Text = string.Empty;
             }
         }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            string inputText = textBox.Text;
+            var matches = IpPortParser.FindAll(inputText);
+
+            if (matches.Count == 0)
+            {
+                resultTextBox.Text = "IP-адреса с портами не найдены.";
+                return;
+            }
+
+            var sb = new StringBuilder();
+            sb.AppendLine("Найденные IP-адреса с портами:");
+
+            foreach (var m in matches)
+                sb.AppendLine($"\"{m.Value}\" at position {m.Index} (length {m.Length})");
+
+            resultTextBox.Text = sb.ToString();
+        }
+
     }
 }
